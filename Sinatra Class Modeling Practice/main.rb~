@@ -1,0 +1,33 @@
+require 'rubygems'
+require 'sinatra'
+require 'data_mapper'
+gem 'dm-mysql-adapter'
+
+DataMapper::Logger.new($stdout, :debug)
+DataMapper::setup(:default, 'mysql://root:Hgo728898@localhost/class')
+
+class Region  
+  include DataMapper::Resource  
+  property :id, Serial  
+  property :name, Text, :required => true
+  property :complete, Boolean, :required => true, :default => false
+end
+
+DataMapper.finalize.auto_upgrade!
+
+helpers do  
+    include Rack::Utils  
+    alias_method :h, :escape_html  
+end
+
+get '/' do  
+  @regions = Region.all :order => :id.desc    
+  erb :home  
+end
+
+post '/' do  
+  r = Region.new  
+  r.name = params[:name]    
+  r.save  
+  redirect '/'  
+end

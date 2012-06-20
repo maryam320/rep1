@@ -1,0 +1,12 @@
+<section>  
+  <form action="/" method="post">  
+    <textarea name="name" placeholder="Type Region Here&hellip;"></textarea>  
+    <input type="submit" value="Submit">  
+  </form>  
+</section>  
+  
+<% @regions.each do |region| %>    
+    <p>  
+      <%=h region.name %>    
+    </p>
+<% end %>  

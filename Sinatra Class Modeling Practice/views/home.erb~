@@ -1,0 +1,17 @@
+<section>  
+  <form action="/" method="post">  
+    <textarea name="name" placeholder="Type Region Here&hellip;"></textarea>  
+    <input type="submit" value="Submit">  
+  </form>  
+</section>  
+  
+<% @regions.each do |region| %>  
+  <article <%= 'class="complete"' if region.complete %>>  
+    <p>  
+      <%=h region.name %>    
+    </p>
+    <p class="links">  
+      <a href="/<%= note.id %>/complete">&#8623;</a>  
+    </p>
+  </article>  
+<% end %>  
